@@ -4,11 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Voter</title>
+
+  <!-- Model Viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <!-- ✅ Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="Aud.mp3" type="audio/mpeg">
+  </audio>
+
   <main class="container">
     <h1>Voter</h1>
     <p class="subtitle">Allreal</p>
@@ -27,8 +39,30 @@
       <button slot="ar-button" class="ar-button">👓 View in AR</button>
     </model-viewer>
 
+    <!-- ✅ Music Button -->
+    <button onclick="playMusic()" class="ar-button" style="margin-top: 15px;">
+      🔊 Play Music
+    </button>
+
     <p class="note">No app required – works in your browser.</p>
   </main>
+
+  <!-- ✅ Script -->
+  <script>
+    const music = document.getElementById("bgMusic");
+
+    function playMusic() {
+      music.volume = 0.5; // adjust volume if needed
+      music.play().catch(err => {
+        console.log("Autoplay blocked:", err);
+      });
+    }
+
+    // ✅ Auto play after first user interaction (better UX)
+    document.addEventListener("click", () => {
+      music.play().catch(() => {});
+    }, { once: true });
+  </script>
+
 </body>
 </html>
-
