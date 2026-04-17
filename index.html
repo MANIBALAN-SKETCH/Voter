@@ -16,7 +16,8 @@
 </head>
 
 <body>
-  <!-- ✅ Background Music -->
+
+  <!-- 🎵 Background Music -->
   <audio id="bgMusic" loop>
     <source src="Aud.mp3" type="audio/mpeg">
   </audio>
@@ -33,14 +34,14 @@
       camera-controls
       autoplay
       shadow-intensity="1"
-      alt="A 3D model of T-Rex"
+      alt="3D model"
       class="model-viewer"
     >
       <button slot="ar-button" class="ar-button">👓 View in AR</button>
     </model-viewer>
 
-    <!-- ✅ Music Button -->
-    <button onclick="playMusic()" class="ar-button" style="margin-top: 15px;">
+    <!-- 🔊 Toggle Music Button -->
+    <button id="musicBtn" class="ar-button" style="margin-top: 15px;">
       🔊 Play Music
     </button>
 
@@ -50,18 +51,29 @@
   <!-- ✅ Script -->
   <script>
     const music = document.getElementById("bgMusic");
+    const btn = document.getElementById("musicBtn");
 
-    function playMusic() {
-      music.volume = 0.5; // adjust volume if needed
-      music.play().catch(err => {
-        console.log("Autoplay blocked:", err);
-      });
-    }
+    let isPlaying = false;
 
-    // ✅ Auto play after first user interaction (better UX)
-    document.addEventListener("click", () => {
-      music.play().catch(() => {});
-    }, { once: true });
+    btn.addEventListener("click", () => {
+      if (!isPlaying) {
+        music.volume = 0.5;
+
+        music.play().then(() => {
+          btn.innerText = "⏹ Stop Music";
+          isPlaying = true;
+        }).catch(err => {
+          console.log("Playback blocked:", err);
+        });
+
+      } else {
+        music.pause();
+        music.currentTime = 0; // reset (optional)
+
+        btn.innerText = "🔊 Play Music";
+        isPlaying = false;
+      }
+    });
   </script>
 
 </body>
