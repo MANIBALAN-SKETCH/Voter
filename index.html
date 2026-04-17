@@ -2,22 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Voter AR</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voter</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Three.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/loaders/GLTFLoader.js"></script>
 </head>
-
 <body>
-  <video id="video" autoplay playsinline></video>
-  <canvas id="canvas"></canvas>
+  <main class="container">
+    <h1>Voter</h1>
+    <p class="subtitle">Allreal</p>
 
-  <button id="startBtn">Start AR</button>
+    <model-viewer
+      src="voter1.glb"
+      ios-src="model.usdz"
+      ar
+      ar-modes="scene-viewer webxr quick-look"
+      camera-controls
+      autoplay
+      shadow-intensity="1"
+      alt="A 3D model of T-Rex"
+      class="model-viewer"
+    >
+      <button slot="ar-button" class="ar-button">👓 View in AR</button>
+    </model-viewer>
 
-  <script src="script.js"></script>
+    <p class="note">No app required – works in your browser.</p>
+  </main>
 </body>
 </html>
+
